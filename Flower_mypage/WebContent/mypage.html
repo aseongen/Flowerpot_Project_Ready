@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+<link rel="stylesheet" href="css/a.css">
+<link rel="stylesheet" href="css/b.css">
+<link rel="stylesheet" href="css/c.css">
+<script src="/common_js/common_filter.js?ver=1.15.31"></script>
+<script src="/common_js/mypage_v1.js?ver=1.15.31"></script>
+<div class="page_aticle aticle_type2">
+	<div class="page_section section_myinfo">
+		<div class="head_aticle">
+			<h2 class="tit">개인 정보 수정</h2>
+		</div>
+		<script src="/shop/data/skin/designgj/godo.password_strength.js" type="text/javascript"></script>
+		<script src="/common_js/join_v1.js?ver=1.15.31"></script>
+		<style>
+/* 회원정보수정일때 */
+.member_join .reg_agree, .member_join .boardWrite {
+	padding: 0 20px 77px;
+	border-top: 2px solid #5f0080;
+	font-size: 11px;
+	color: #747474;
+	line-height: 20px
+}
+
+.member_join .field_head.head_type1 {
+	margin-top: -3px;
+	padding-top: 0
+}
+
+.member_join .field_head.head_type2 {
+	padding: 0 0 13px
+}
+
+.member_join .mobile td.memberCols2 {
+	padding-bottom: 10px
+}
+</style>
+		<div class="member_join">
+			<div class="">
+				<form id=form name=frmMember method=post action="/shop/member/indb.php" onsubmit="return chkForm2(this)">
+					<input type=hidden name=mode value="modMember"> <input type="hidden" name="check_mobile" value="" /> <input type="hidden" name="auth_finish_code" value="" /> <input type=hidden name=rncheck value=""> <input type=hidden name=dupeinfo value=""> <input type=hidden name=pakey value=""> <input type=hidden name=foreigner value="1"> <input type=hidden name=passwordSkin value="Y"> <input type=hidden name=m_id value="">
+
+					<div class="field_head head_type1">
+						<h3 class="tit">기본정보</h3>
+						<p class="sub">*필수입력사항</p>
+					</div>
+					<div class="boardWrite">
+						<table class="tbl_comm">
+							<tr>
+								<td class="memberCols1">아이디*</td>
+								<td class="memberCols2"><input type="text" value="" readonly class="inp_read"></td>
+							</tr>
+							<tr>
+								<td class="memberCols1">현재 비밀번호</td>
+								<td class="memberCols2"><input type="password" name="originalPassword" id="originalPassword" onblur="checkCurrentPassword(this);return;" />
+									<p class="txt_guide">
+										<span class="txt txt_case4 bad">현재 비밀번호를 확인해주세요</span>
+									</p></td>
+							</tr>
+							<tr class="member_pwd">
+								<td class="memberCols1">새 비밀번호</td>
+								<td class="memberCols2"><input type="password" name="newPassword" id="newPassword" label="새 비밀번호" option=regPass maxlength="16" class="reg_pw"> <input type="hidden" name="newPasswordCheck" value="0">
+									<p class="txt_guide">
+										<span class="txt txt_case4">현재 비밀번호와 다르게 입력</span> <span class="txt txt_case1">10자 이상 입력</span> <span class="txt txt_case2">영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합</span> <span class="txt txt_case3">동일한 숫자 3개 이상 연속 사용 불가</span>
+									</p></td>
+							</tr>
+							<tr class="member_pwd">
+								<td class="memberCols1">새 비밀번호 확인</td>
+								<td class="memberCols2"><input type="password" name="confirmPassword" id="confirmPassword" label="새 비밀번호" option=regPass maxlength="16" class="confirm_pw">
+									<p class="txt_guide">
+										<span class="txt txt_case1">동일한 비밀번호를 입력해주세요.</span>
+									</p></td>
+							</tr>
+							<tr>
+								<td class="memberCols1">이름*</td>
+								<td class="memberCols2"><input type="text" name=name value="" required fld_esssential label="이름" placeholder="고객님의 이름을 입력해주세요"></td>
+							</tr>
+							<tr>
+								<td class="memberCols1">이메일*</td>
+								<td class="memberCols2"><input type="text" name=email label="이메일" placeholder="예: marketkurly@kurly.com"> <a href="javascript:void(0)" onClick="chkEmail()"><span class="bhs_button">이메일 중복확인</span></a></td>
+							</tr>
+							<tr class="mobile">
+								<td class="memberCols1">휴대폰*</td>
+								<td class="memberCols2">
+									<div class="phone_num">
+										<input type="text" value="" pattern="[0-9]*" name="mobileInp" placeholder="숫자만 입력해주세요" class="inp"> <input type="hidden" name="mobile[]" id="mobile0" value="" required option=regNum label="휴대폰"> <input type="hidden" name="mobile[]" id="mobile1" value="" required option=regNum label="휴대폰"> <input type="hidden" name="mobile[]" id="mobile2" value="" required option=regNum label="휴대폰"> <a href="javascript:void(0)" id="btn_cert"><span class="bhs_button disabled">인증번호받기</span></a>
+									</div>
+									<div class="cert_confirm_row">
+										<input type="text" name="auth_code" id="auth_code" value='' size='' maxlength='6' label="인증번호 확인" disabled class="inp_confirm"> <a href="javascript:void(0)" id="btn_cert_confirm" return false><span class="bhs_button disabled">인증번호 확인</span></a>
+										<p id="countdown" class="count_down"></p>
+									</div>
+									<p class="txt_guide">
+										<span class="txt txt_case1"></span>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="field_head head_type2">
+						<h3 class="tit">추가정보</h3>
+					</div>
+					<div class="boardWrite">
+						<table class="tbl_comm">
+							<tr class="select_sex">
+								<td class="memberCols1">성별</td>
+								<td class="memberCols2">
+									<div class="group_radio">
+										<label class="label_radio"> <input type=radio name=sex_option label="성별" value="m"> <span class="text_position">남자</span>
+										</label> <label class="label_radio checked"> <input type=radio name=sex_option label="성별" value="w"> <span class="text_position">여자</span>
+										</label> <label class="label_radio"> <input type=radio name=sex_option label="성별" value="n"> <span class="text_position">선택안함</span>
+										</label> <input type="hidden" type=radio name=sex label="성별" value="">
+									</div>
+								</td>
+							</tr>
+							<tr class="birth field_birth">
+								<td class="memberCols1">생년월일</td>
+								<td class="memberCols2">
+									<div class="birth_day">
+										<input type="text" name=birth_year id="birth_year" pattern="[0-9]*" value="" label="생년월일" size=4 maxlength=4 placeholder="YYYY"> <span class="bar"><span>/</span></span> <input type="text" name=birth[] id="birth_month" pattern="[0-9]*" value="" label="생년월일" size=2 maxlength=2 placeholder="MM"> <span class="bar"><span>/</span></span> <input type="text" name=birth[] id="birth_day" pattern="[0-9]*" value="" label="생년월일" size=2 maxlength=2 placeholder="DD">
+									</div>
+									<p class="txt_guide">
+										<span class="txt bad"></span>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="memberCols1">선택약관 동의</td>
+								<td class="memberCols2 reg_agree">
+									<div class="bg_dim"></div>
+									<div class="check_view">
+										<input type="hidden" id="consentHidden" name="consent[1]" value="y"> <label class="select_check check_agree checked"> <input type="checkbox" name="hiddenCheck" class="styled-checkbox-black" value="y" checked="checked"> <span class="txt_checkbox no_pd">개인정보처리방침 <span class="sub">(선택)</span></span>
+										</label> <a href="#none" class="link btn_link btn_link3 btn_choice">약관보기 </a>
+									</div>
+
+									<div class="layer layer_choice">
+										<div class="inner_layer">
+											<h4 class="tit_layer">개인정보 수집·이용 동의 (선택)</h4>
+											<div class="box_tbl">
+												<table cellpadding="0" cellspacing="0" width="100%">
+													<caption class="screen_out">개인정보의 수집 및 이용목적</caption>
+													<colgroup>
+														<col width="40%">
+														<col width="25%">
+														<col width="35%">
+													</colgroup>
+													<thead>
+														<tr>
+															<th scope="row">수집 목적</th>
+															<th scope="row">수집 항목</th>
+															<th scope="row">보유 기간</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>맞춤형 회원 서비스 제공</td>
+															<td>성별, 생년월일</td>
+															<td>회원 탈퇴 즉시 파기</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+											<p class="txt_service">※ 동의를 거부하시는 경우에도 서비스는 이용하실 수 있습니다.</p>
+											<button type="button" class="btn_ok">확인</button>
+											<button type="button" class="btn_close">
+												<span class="screen_out">레이어 닫기</span>
+											</button>
+										</div>
+									</div>
+
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="field_head head_type2">
+						<h3 class="tit">이용약관동의*</h3>
+						<p class="sub">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</p>
+					</div>
+					<div class="reg_agree">
+						<div class="check_view">
+							<label class="select_check check_agree checked"> <input type="checkbox" name="marketing" class="styled-checkbox-black" value="y" checked="checked"> <span class="txt_checkbox no_pd">무료배송, 할인쿠폰 등 혜택/정보 수신 <span class="sub">(선택)</span></span>
+							</label>
+							<div class="check_event email_sms">
+								<label class="select_check check_agree checked"> <input type="checkbox" name="sms" class="styled-checkbox-black" value="y"> <span class="txt_checkbox no_pd">SMS</span>
+								</label>
+								
+								 <label class="select_check check_agree checked"> <input type="checkbox" name="mailling" class="styled-checkbox-black" value="y" checked="checked"> <span class="txt_checkbox no_pd">이메일</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div id=avoidDbl class="after" style="text-align: center; margin-top: 20px;">
+						<span class=noline><a href="/shop/member/hack.php?&"><span class="bhs_button active" style="float: none;">탈퇴하기</span></a></span> <span class=noline><input type="submit" class="bhs_button" value="회원정보수정" style="float: none; max-width: none;"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<iframe id="ifrmRnCheck" name="ifrmRnCheck" style="display: none;"></iframe>
+		<iframe id="ifrmHpauth" name="ifrmHpauth" style="display: none;"></iframe>
+
+	</div>
+</div>
+
+<div id="layerDSR">
+	<div class="bg_dim"></div>
+	<div class="in_layer">
+		<div class="inner_layer layer_star">
+			<strong class="dsr_result">샛별배송 지역입니다.</strong>
+			<div class="ani">
+				<img data-src="https://res.kurly.com/mobile/img/1908/img_delivery_kurly.png" src="https://res.kurly.com/mobile/service/common/bg_1x1.png" alt="샛별배송 이미지">
+			</div>
+			<p class="dsr_desc">
+				<strong class="emph">오늘 밤 11시 전</strong>까지 주문시<br> <strong class="emph">다음날 아침 7시</strong> 이전 도착합니다!
+			</p>
+			<p class="dsr_notice">샛별배송은 휴무 없이 매일 배송 합니다</p>
+		</div>
+		<div class="inner_layer layer_normal">
+			<strong class="dsr_result">택배배송 지역입니다.</strong>
+			<div class="ani">
+				<img data-src="https://res.kurly.com/mobile/img/1908/img_delivery_car.png" src="https://res.kurly.com/mobile/service/common/bg_1x1.png" alt="택배배송 이미지">
+			</div>
+			<p class="dsr_desc">
+				<strong class="emph">밤 8시 전</strong>까지 주문시<br> <strong class="emph">다음날</strong> 도착합니다!
+			</p>
+			<p class="dsr_notice">일요일은 배송 휴무로 토요일에는 주문 불가</p>
+		</div>
+		<div class="inner_layer layer_none">
+			<strong class="dsr_result">배송 불가 지역입니다.</strong>
+			<div class="ani">
+				<img data-src="https://res.kurly.com/mobile/img/1908/img_delivery_none.png" src="https://res.kurly.com/mobile/service/common/bg_1x1.png" alt="배송불가 이미지">
+			</div>
+			<p class="dsr_desc">
+				<strong class="emph">도로명 주소</strong>로 검색하셨다면,<br> <strong class="emph">지번 주소(구 주소)</strong>로 다시 시도해 주세요.
+			</p>
+			<p class="dsr_notice">배송지역을 확장하도록 노력하겠습니다!</p>
+		</div>
+		<div class="layer_btn1">
+			<button type="button" class="btn_close" onclick="$('#layerDSR').hide();$(this).parent().find('.inner_layer').hide();">확인</button>
+		</div>
+		<button type="button" class="layer_close" onclick="$('#layerDSR').hide();$(this).parent().find('.inner_layer').hide();"></button>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>
